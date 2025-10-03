@@ -35,6 +35,32 @@ export const categories: Category[] = [
     slug: "savon",
     subcategories: [
       {
+        title: "Savon au curcuma et miel",
+        slug: "savon-au-curcuma-et-miel",
+        id: "hzbshqwo",
+      },
+
+      {
+        title: "Savon au agrumes",
+        slug: "savon-au-agrumes",
+        id: "aocwgjs",
+      },
+      {
+        title: "Savon a l'avoine et au beurre de karité",
+        slug: "savon-a-lavoine-et-au-beurre-de-karite",
+        id: "slpsakce",
+      },
+      {
+        title: "savon exfoliant au citron et au graines de pavot",
+        slug: "savon-exfoliant-au-citron-et-au-graines-de-pavot",
+        id: "asckppao",
+      },
+      {
+        title: "Savon purifiant au laurier et clous de girofle",
+        slug: "savon-purifiant-au-laurier-et-clous-de-girofle",
+        id: "aoscqwcwjnc",
+      },
+      {
         id: "tyaw9e",
         title: "Op",
         slug: "op",
