@@ -134,10 +134,5 @@ export const categories: Category[] = [
     id: "b51k0j",
     title: "Bebe & Maman",
     slug: "bebe-maman",
-  },
-  {
-    id: "h6j7n1",
-    title: "Sexualité",
-    slug: "sexualite",
-  },
+  }
 ];
