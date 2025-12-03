@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   description:
     "Tableau de bord administrateur yodi pour la gestion de notre boutique en ligne",
   icons: {
-    icon: "/yodi.png",
-    shortcut: "/yodi.png",
-    apple: "/yodi.png",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
   },
 
   authors: [{ name: "yodi" }],
@@ -34,14 +34,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://manage.yodi.com",
     siteName: "yodi",
     title: "yodi - Tableau de bord administrateur",
     description:
       "Tableau de bord administrateur yodi pour la gestion de notre boutique en ligne",
     images: [
       {
-        url: "/yodi.png",
+        url: "/logo.png",
         width: 1200,
         height: 630,
         alt: "yodi - Tableau de bord administrateur",
@@ -53,7 +52,7 @@ export const metadata: Metadata = {
     title: "yodi - Tableau de bord administrateur",
     description:
       "Tableau de bord administrateur yodi pour la gestion de notre boutique en ligne",
-    images: ["/yodi.png"],
+    images: ["/logo.png"],
     creator: "yodi",
   },
 };

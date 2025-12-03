@@ -25,6 +25,9 @@ import {
 import { formatCurrency } from "@/lib/utils";
 import { OrderDetailsDialog } from "@/components/order-details-dialog";
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { CurrencyEditDialog } from "@/components/currency-edit-dialog";
+import { Button } from "@/components/ui/button";
+import { Coins } from "lucide-react";
 
 export default function DashboardPage() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -33,6 +36,8 @@ export default function DashboardPage() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [isCurrencyDialogOpen, setIsCurrencyDialogOpen] = useState(false);
+  const [currency, setCurrency] = useState<{ name: string; rate: number } | null>(null);
   const [pagination, setPagination] = useState({
     total: 0,
     page: 1,
@@ -67,6 +72,22 @@ export default function DashboardPage() {
   useEffect(() => {
     fetchOrders();
   }, [searchTerm, statusFilter]);
+
+  const fetchCurrency = async () => {
+    try {
+      const response = await fetch("/api/currency");
+      if (response.ok) {
+        const data = await response.json();
+        setCurrency(data);
+      }
+    } catch (error) {
+      console.error("Erreur lors de la récupération de la devise:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCurrency();
+  }, []);
 
   useEffect(() => {
     const handleViewOrder = (event: CustomEvent<Order>) => {
@@ -166,6 +187,21 @@ export default function DashboardPage() {
   return (
     <>
       <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+        <div className="flex items-center justify-between px-4 lg:px-6">
+          <h1 className="text-2xl font-bold">Tableau de bord</h1>
+          <Button
+            onClick={() => setIsCurrencyDialogOpen(true)}
+            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg"
+          >
+            <Coins className="h-4 w-4 mr-2" />
+            <span className="mr-2">Modifier la devise</span>
+            {currency && (
+              <span className="ml-2 px-2 py-0.5 bg-white/20 rounded-md text-sm font-semibold">
+                {currency.name} (${currency.rate})
+              </span>
+            )}
+          </Button>
+        </div>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {statCards.map(renderStatCard)}
         </div>
@@ -223,6 +259,12 @@ export default function DashboardPage() {
         order={selectedOrder as Order | null}
         open={isDetailsOpen}
         onOpenChange={setIsDetailsOpen}
+      />
+
+      <CurrencyEditDialog
+        open={isCurrencyDialogOpen}
+        onOpenChange={setIsCurrencyDialogOpen}
+        onUpdate={fetchCurrency}
       />
     </>
   );
