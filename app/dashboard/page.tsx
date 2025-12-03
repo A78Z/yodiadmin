@@ -28,6 +28,7 @@ import { ChartAreaInteractive } from "@/components/chart-area-interactive";
 import { CurrencyEditDialog } from "@/components/currency-edit-dialog";
 import { Button } from "@/components/ui/button";
 import { Coins } from "lucide-react";
+import { toast } from "sonner";
 
 export default function DashboardPage() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -184,6 +185,31 @@ export default function DashboardPage() {
     );
   };
 
+  const deleteOrder = async (id: string) => {
+    try {
+      const response = await fetch(`/api/orders/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok)
+        throw new Error("Erreur lors de la suppression de la commande");
+      toast.success("Commande supprimée avec succès", {
+        style: {
+          color: "#10B981",
+        },
+        position: "top-right",
+      });
+      fetchOrders(pagination.page);
+    } catch (error) {
+      console.error("Erreur:", error);
+      toast.error("Erreur lors de la suppression de la commande", {
+        style: {
+          color: "#EF4444",
+        },
+        position: "top-right",
+      });
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
@@ -249,6 +275,7 @@ export default function DashboardPage() {
                 data={orders as unknown as Order[]}
                 pagination={pagination}
                 onPageChange={(page) => fetchOrders(page)}
+                onDeleteOrder={(id) => deleteOrder(id)}
               />
             )}
           </CardContent>

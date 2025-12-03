@@ -18,7 +18,8 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Trash } from "lucide-react";
+import { Order } from "@/app/dashboard/columns";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -30,6 +31,7 @@ interface DataTableProps<TData, TValue> {
     totalPages: number;
   };
   onPageChange: (page: number) => void;
+  onDeleteOrder: (id: string) => void;
 }
 
 export function OrdersTable<TData, TValue>({
@@ -37,6 +39,7 @@ export function OrdersTable<TData, TValue>({
   data,
   pagination,
   onPageChange,
+  onDeleteOrder,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
 
@@ -60,7 +63,10 @@ export function OrdersTable<TData, TValue>({
               <TableRow key={headerGroup.id} className="hover:bg-transparent">
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="text-gray-700 font-semibold">
+                    <TableHead
+                      key={header.id}
+                      className="text-gray-700 font-semibold"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -89,6 +95,15 @@ export function OrdersTable<TData, TValue>({
                       )}
                     </TableCell>
                   ))}
+                  <TableCell>
+                    <button
+                      className="flex items-center gap-2 cursor-pointer text-red-500 bg-red-50"
+                      onClick={() => onDeleteOrder((row.original as Order)._id)}
+                    >
+                      <Trash className="h-4 w-4 " />
+                      <span className="sr-only">Supprimer</span>
+                    </button>
+                  </TableCell>
                 </TableRow>
               ))
             ) : (
@@ -134,4 +149,4 @@ export function OrdersTable<TData, TValue>({
       </div>
     </div>
   );
-} 
+}

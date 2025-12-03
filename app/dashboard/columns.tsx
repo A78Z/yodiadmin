@@ -22,6 +22,8 @@ export type Order = {
   total: number;
   status: string;
   createdAt: string;
+  selectedCurrency: string;
+  valueCurrency: number;
   products: CART[];
   paymentMethod: string;
   shippingCost: number;
@@ -80,6 +82,7 @@ export const columns: ColumnDef<Order>[] = [
     accessorKey: "orderNumber",
     header: "Numéro de commande",
     cell: ({ row }) => {
+      console.log(row.original);
       const order = row.original;
       return "#" + order._id.slice(-6).toUpperCase();
     },
@@ -97,7 +100,7 @@ export const columns: ColumnDef<Order>[] = [
     header: "Total",
     cell: ({ row }) => {
       const amount = row.getValue("total") as number;
-      return formatCurrency(amount);
+      return amount + " " + row.original.selectedCurrency;
     },
   },
   {

@@ -7,6 +7,8 @@ interface IOrder extends Document {
   shippingCost: number;
   total: number;
   paymentMethod: string;
+  selectedCurrency: string;
+  valueCurrency: number;
   shippingInfo: IShippingInfo;
   status: string;
 }
@@ -44,6 +46,15 @@ const orderSchema = new Schema(
     },
     paymentMethod: {
       type: String,
+      required: true,
+    },
+    selectedCurrency: {
+      type: String,
+      required: true,
+      default: "FCFA",
+    },
+    valueCurrency: {
+      type: Number,
       required: true,
     },
     shippingInfo: {

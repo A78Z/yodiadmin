@@ -34,7 +34,7 @@ export function OrderDetailsDialog({
 }: OrderDetailsDialogProps) {
   if (!order) return null;
 
-  // console.log(order);
+  console.log(order);
 
   // Timeline/étapes de la commande
   function StepperOrder({ status }: { status: string }) {
@@ -175,34 +175,37 @@ export function OrderDetailsDialog({
                           <div className="text-xs text-black/80 font-semibold">
                             {prod.discount && prod.discount > 0 && (
                               <span className="ml-2">
-                                {Math.round(
+                                {Number((
                                   prod.price -
                                     (prod.price * prod.discount) / 100
-                                )}{" "}
-                                FCFA
+                                ) / order.valueCurrency).toFixed(2)}{" "}
+                                {order.selectedCurrency}
                               </span>
                             )}
                             {!prod.discount && prod.price > 0 && (
-                              <span>{prod.price.toLocaleString()} FCFA</span>
+                              <span>
+                                  {Number(prod.price / order.valueCurrency).toFixed(2)}{" "}
+                                {order.selectedCurrency}
+                              </span>
                             )}
                           </div>
                         )}
                         {prod.price && prod.discount && prod.discount > 0 && (
                           <div className="text-xs text-gray-400 font-semibold ml-2">
                             {(
-                              Math.round(
+                              Number((
                                 prod.price - (prod.price * prod.discount) / 100
                               ) * prod.quantity
-                            ).toLocaleString()}{" "}
-                            FCFA
+                            ) / order.valueCurrency).toFixed(2)}{" "}
+                            {order.selectedCurrency}
                           </div>
                         )}
                         {prod.price && !prod.discount && (
                           <div className="text-xs text-gray-400 font-semibold ml-2">
-                            {Math.round(
+                            {Number((
                               prod.price * prod.quantity
-                            ).toLocaleString()}{" "}
-                            FCFA
+                            ) / order.valueCurrency).toFixed(2)}{" "}
+                            {order.selectedCurrency}
                           </div>
                         )}
                       </div>
@@ -221,7 +224,7 @@ export function OrderDetailsDialog({
                     <span className="text-xs text-gray-500">
                       Total :{" "}
                       <span className="font-semibold text-black/80">
-                        {order.total.toLocaleString()} FCFA
+                        {order.total.toLocaleString()} {order.selectedCurrency}
                       </span>
                     </span>
                     <span className="text-xs text-gray-500">
@@ -247,7 +250,8 @@ export function OrderDetailsDialog({
                     <span className="flex items-center gap-2 text-xs text-gray-500">
                       <span className="font-medium">Livraison :</span>{" "}
                       <span className="font-semibold text-black/70">
-                        {order.shippingCost?.toLocaleString() || "-"} FCFA
+                        {Number(order.shippingCost / order.valueCurrency).toFixed(2) || "-"}{" "}
+                        {order.selectedCurrency}
                       </span>
                     </span>
                   </div>

@@ -60,3 +60,33 @@ export async function PATCH(
     return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const { id } = await params;
+  const session = await getServerSession(options);
+
+  if (!session || !session.user?.email) {
+    return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+  }
+
+  try {
+    const order = await Order.findByIdAndDelete(id);
+    if (!order) {
+      return NextResponse.json(
+        { error: "Commande non trouvée" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      { message: "Commande supprimée avec succès" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Erreur lors de la suppression de la commande:", error);
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
+  }
+}
