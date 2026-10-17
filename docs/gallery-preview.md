@@ -74,3 +74,11 @@ La réauthentification Vercel a ensuite permis la copie directe du paramètre de
 Les trois variables serveur `BLOB_READ_WRITE_TOKEN`, `GALLERY_ADMIN_EMAILS` et `GALLERY_BLOB_HOST` ont été enregistrées dans le projet admin. La portée `refonte` de chacune a été vérifiée dans la liste Vercel ; aucune variable de production n’a été ajoutée. La connexion utilise ces variables manuelles, sans liaison automatique du stockage à toutes les branches Preview. Le compte administrateur autorisé n’est pas consigné dans ce dépôt public.
 
 Le domaine de stockage a aussi été enregistré dans `GALLERY_BLOB_HOST` du projet boutique, portée `refonte` vérifiée. Aucun jeton d’écriture n’a été ajouté à la boutique. Les deux Previews doivent être redéployées pour charger ces réglages. Le contrôle réel du formulaire attend une session administrateur dans la Preview.
+
+## Activation vérifiée dans la Preview
+
+Les déploiements `8407081` (admin) et `7bae440` (boutique) ont tous deux obtenu le statut Vercel `success`. La session utilisateur autorisée a pu ouvrir la page https://yodiadmin-git-refonte-a78zs-projects.vercel.app/dashboard/gallery après un rechargement complet du navigateur, nécessaire pour quitter l’ancienne version conservée en cache. Le formulaire charge, le sélecteur de fichier est actif, aucun avertissement de stockage n’est affiché et la liste des médias est vide. Le bouton de publication reste désactivé tant qu’aucun fichier n’est choisi, comme prévu.
+
+Contrôle visuel du formulaire sur ordinateur et à 375 × 844 : mise en page et champs contenus dans l’écran. Ce contrôle a révélé l’absence préexistante de commande pour ouvrir la navigation admin sur mobile ; un déclencheur de navigation mobile a été ajouté dans l’en-tête afin de rendre « Galerie du site » accessible sans saisir son URL.
+
+Aucun fichier n’a été envoyé ; aucun document de média n’a été créé. Le premier envoi réel, sa publication et sa lecture restent à vérifier avec un média choisi par l’utilisateur. Les identifiants du compte et les jetons ne sont pas publiés dans le dépôt.
