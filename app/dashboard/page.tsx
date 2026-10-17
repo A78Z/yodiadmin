@@ -168,7 +168,7 @@ export default function DashboardPage() {
       title: "Montant Total",
       value:
         Number(
-          stats.totalAmount * Number(orders[0].valueCurrency || 1)
+          stats.totalAmount * Number(orders[0]?.valueCurrency || 1)
         ).toFixed(2) +
         " " +
         orders[0].selectedCurrency,

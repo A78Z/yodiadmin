@@ -17,8 +17,7 @@ export async function POST(request: Request) {
           addRandomSuffix: false, allowOverwrite: false,
         };
       },
-      // No database write from a callback. Publication is a separate authenticated action.
-      onUploadCompleted: async () => {},
+      // Publication is a separate authenticated action; no webhook or protection bypass is needed.
     });
     return Response.json(result, { headers: { "Cache-Control": "no-store" } });
   } catch {

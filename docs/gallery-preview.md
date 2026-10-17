@@ -46,3 +46,5 @@ Documentation officielle utilisée : https://vercel.com/docs/vercel-blob/client-
 - Boutique : 52 tests réussis ; ESLint ciblé réussi ; neuf erreurs TypeScript préexistantes hors galerie.
 - Pas de serveur ni de build local lancé.
 - Tests réels d’envoi/publication/masquage et lecteur vidéo à terminer une fois le stockage et le compte connectés. Aucun média de démonstration ni donnée personnelle ne sont publiés pour simuler ce parcours.
+
+Premier build Vercel `e0c73f3` : échec sur un accès préexistant à `orders[0].valueCurrency` lorsque la liste est vide pendant le prérendu de `/dashboard`. Correction minimale : accès optionnel `orders[0]?.valueCurrency`, même valeur de repli existante. Aucune commande n’est modifiée. Le callback Blob inutile a aussi été retiré : la publication reste une action authentifiée distincte et ne nécessite aucun contournement de la protection Vercel.
