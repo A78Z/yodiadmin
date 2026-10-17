@@ -58,3 +58,19 @@ La Preview admin du commit `45919e0` est **Ready** : https://yodiadmin-g02q2xzoq
 Les noms des variables serveur du projet Vercel ont été contrôlés sans révéler leurs valeurs : aucune variable Blob ou galerie n’est configurée. L’activation reste en attente de l’adresse administrateur autorisée et de l’accord explicite pour créer le stockage public dédié. La validation automatique a refusé la poursuite du configurateur Blob, car elle peut provisionner une ressource persistante et potentiellement facturable sans accord ; aucun stockage n’a été créé.
 
 Contrôle navigateur de `/dashboard/gallery` sur cette Preview : en l’absence de session admin, redirection effective vers le formulaire de connexion. Aucune tentative de connexion ni transmission de mot de passe effectuée. Le formulaire d’envoi et le lecteur de médias réels restent à tester après configuration et connexion autorisées.
+
+## Activation du stockage — 17 octobre 2026
+
+L’utilisateur a fourni le compte à autoriser et a explicitement approuvé la création du stockage public dédié. Son adresse reste dans la configuration serveur, pas dans ce dépôt public.
+
+Le stockage `yodi-gallery-refonte` a été créé au niveau de l’équipe, accès public, région IAD1. Domaine public : `uqatabojauagou1s.public.blob.vercel-storage.com`. Aucun projet de production n’a été connecté et aucun fichier n’a été envoyé.
+
+La connexion automatique Vercel propose une portée à toutes les Previews. Pour respecter la restriction `refonte`, la configuration manuelle de variables par branche a été préparée. Le formulaire d’ajout de variable du projet admin a été réglé sur la seule branche `refonte`, avec Production et Preview globale désélectionnées. Aucune variable n’a encore été enregistrée.
+
+L’accès à la clé masquée déclenche une réauthentification Vercel à deux facteurs. La saisie du code dans le navigateur a été laissée à l’utilisateur ; aucun code ni jeton n’est demandé dans le chat. L’activation et les tests réels attendent cette vérification.
+
+La réauthentification Vercel a ensuite permis la copie directe du paramètre de clé vers le formulaire Secret, sans afficher le jeton dans les sorties d’outils ou les logs. Le presse-papiers a été remplacé après transfert.
+
+Les trois variables serveur `BLOB_READ_WRITE_TOKEN`, `GALLERY_ADMIN_EMAILS` et `GALLERY_BLOB_HOST` ont été enregistrées dans le projet admin. La portée `refonte` de chacune a été vérifiée dans la liste Vercel ; aucune variable de production n’a été ajoutée. La connexion utilise ces variables manuelles, sans liaison automatique du stockage à toutes les branches Preview. Le compte administrateur autorisé n’est pas consigné dans ce dépôt public.
+
+Le domaine de stockage a aussi été enregistré dans `GALLERY_BLOB_HOST` du projet boutique, portée `refonte` vérifiée. Aucun jeton d’écriture n’a été ajouté à la boutique. Les deux Previews doivent être redéployées pour charger ces réglages. Le contrôle réel du formulaire attend une session administrateur dans la Preview.
