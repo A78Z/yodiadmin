@@ -171,7 +171,7 @@ export default function DashboardPage() {
           stats.totalAmount * Number(orders[0]?.valueCurrency || 1)
         ).toFixed(2) +
         " " +
-        orders[0].selectedCurrency,
+        (orders[0]?.selectedCurrency || "FCFA"),
       icon: ShoppingCart,
       color: "bg-indigo-500",
     },
