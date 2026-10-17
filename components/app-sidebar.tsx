@@ -3,23 +3,13 @@
 import * as React from "react";
 import {
   IconCamera,
-  IconChartBar,
-  IconDatabase,
   IconFileAi,
   IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconHelp,
   IconPackage,
-  IconReport,
-  IconSearch,
-  IconSettings,
   IconUsers,
 } from "@tabler/icons-react";
 
-import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
-import { NavSecondary } from "@/components/nav-secondary";
 import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
@@ -44,6 +34,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       avatar: "/default-user.png",
     },
     navMain: [
+      ...(process.env.NEXT_PUBLIC_GALLERY_PREVIEW === "1" ? [{ title: "Galerie du site", url: "/dashboard/gallery", icon: IconCamera }] : []),
       {
         title: "Produits",
         url: "/dashboard/products",
