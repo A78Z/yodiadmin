@@ -50,3 +50,11 @@ Documentation officielle utilisée : https://vercel.com/docs/vercel-blob/client-
 Premier build Vercel `e0c73f3` : échec sur un accès préexistant à `orders[0].valueCurrency` lorsque la liste est vide pendant le prérendu de `/dashboard`. Correction minimale : accès optionnel `orders[0]?.valueCurrency`, même valeur de repli existante. Aucune commande n’est modifiée. Le callback Blob inutile a aussi été retiré : la publication reste une action authentifiée distincte et ne nécessite aucun contournement de la protection Vercel.
 
 Le build suivant a révélé le second accès de ce même bloc à `orders[0].selectedCurrency`. Les deux accès à la première commande sont désormais protégés ; le libellé de repli pour une liste vide est FCFA.
+
+## Déploiement vérifié
+
+La Preview admin du commit `45919e0` est **Ready** : https://yodiadmin-g02q2xzoq-a78zs-projects.vercel.app/dashboard/gallery . Déploiement : https://vercel.com/a78zs-projects/yodiadmin/3fkg9hGaFPbkVHDLBQMpfWYn1Vxh .
+
+Les noms des variables serveur du projet Vercel ont été contrôlés sans révéler leurs valeurs : aucune variable Blob ou galerie n’est configurée. L’activation reste en attente de l’adresse administrateur autorisée et de l’accord explicite pour créer le stockage public dédié. La validation automatique a refusé la poursuite du configurateur Blob, car elle peut provisionner une ressource persistante et potentiellement facturable sans accord ; aucun stockage n’a été créé.
+
+Contrôle navigateur de `/dashboard/gallery` sur cette Preview : en l’absence de session admin, redirection effective vers le formulaire de connexion. Aucune tentative de connexion ni transmission de mot de passe effectuée. Le formulaire d’envoi et le lecteur de médias réels restent à tester après configuration et connexion autorisées.
