@@ -113,7 +113,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   height={32}
                   className="object-cover object-center"
                 />
-                <span className="text-lg font-bold">Admin</span>
+                <span className="admin-brand"><strong>Maison Yodi-K</strong><small>Administration</small></span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

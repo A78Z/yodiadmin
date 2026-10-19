@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import "@/components/admin-refonte.css";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { SiteHeader } from "@/components/site-header";
@@ -9,6 +11,11 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  useEffect(() => {
+    if (process.env.NEXT_PUBLIC_ADMIN_REFONTE !== "1") return;
+    document.body.dataset.adminRefonte = "true";
+    return () => { delete document.body.dataset.adminRefonte; };
+  }, []);
   return (
     <SidebarProvider
       style={

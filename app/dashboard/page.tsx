@@ -22,7 +22,6 @@ import {
   PackageX,
   ShoppingCart,
 } from "lucide-react";
-import { formatCurrency } from "@/lib/utils";
 import { OrderDetailsDialog } from "@/components/order-details-dialog";
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
 import { CurrencyEditDialog } from "@/components/currency-edit-dialog";
@@ -180,15 +179,15 @@ export default function DashboardPage() {
   const renderStatCard = (stat: (typeof statCards)[0], index: number) => {
     const Icon = stat.icon;
     return (
-      <Card key={index} className="overflow-hidden">
+      <Card key={index} className="admin-stat">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-          <div className={`${stat.color} p-2 rounded-full`}>
-            <Icon className="h-4 w-4 text-white" />
+          <div className="admin-stat-icon">
+            <Icon className="h-4 w-4" />
           </div>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{stat.value}</div>
+          <div className="admin-stat-value">{stat.value}</div>
         </CardContent>
       </Card>
     );
@@ -201,7 +200,7 @@ export default function DashboardPage() {
       });
       if (!response.ok)
         throw new Error("Erreur lors de la suppression de la commande");
-      const data = await response.json();
+      await response.json();
       toast.success("Commande supprimée avec succès", {
         style: {
           color: "#10B981",
@@ -222,37 +221,38 @@ export default function DashboardPage() {
 
   return (
     <>
-      <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-        <div className="flex items-center justify-between px-4 lg:px-6">
-          <h1 className="text-2xl font-bold">Tableau de bord</h1>
+      <div className="admin-page">
+        <div className="admin-intro">
+          <div><p className="admin-eyebrow">Maison Yodi-K · Votre activité</p><h1>Le quotidien de la maison.</h1><p className="admin-subtitle">Commandes, livraisons et suivi de votre boutique, au même endroit.</p></div>
           <Button
             onClick={() => setIsCurrencyDialogOpen(true)}
-            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg"
+            className="admin-currency"
           >
             <Coins className="h-4 w-4 mr-2" />
             <span className="mr-2">Modifier la devise</span>
             {currency && (
-              <span className="ml-2 px-2 py-0.5 bg-white/20 rounded-md text-sm font-semibold">
+              <span className="admin-currency-rate">
                 {currency.name} (${currency.rate})
               </span>
             )}
           </Button>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <p className="text-xs text-muted-foreground">Indicateurs des commandes affichées sur cette page</p>
+        <div className="admin-stats">
           {statCards.map(renderStatCard)}
         </div>
 
-        <div className="px-4 lg:px-6">
+        <div>
           <ChartAreaInteractive />
         </div>
 
         <Card>
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="admin-section-heading">
               <CardTitle>Commandes récentes</CardTitle>
-              <div className="flex items-center gap-4">
+              <div className="admin-filters">
                 <Input
-                  placeholder="Rechercher..."
+                  aria-label="Rechercher une commande" placeholder="Nom, numéro de commande…"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="max-w-sm"

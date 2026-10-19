@@ -103,11 +103,11 @@ export default function ProductsPage() {
 
 
   return (
-    <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Produits</h1>
+    <div className="admin-page">
+      <div className="admin-intro">
+        <div><p className="admin-eyebrow">Maison Yodi-K · Catalogue</p><h1>Les soins de la maison.</h1><p className="admin-subtitle">Retrouvez vos produits, leurs prix et leur disponibilité.</p></div>
         <Link href="/dashboard/products/new">
-          <Button className="bg-[#A36F5E] hover:bg-[#A36F5E]/80 text-black">
+          <Button className="rounded-full px-5">
             <Plus className="mr-2 h-4 w-4" />
             Nouveau Produit
           </Button>
@@ -116,13 +116,13 @@ export default function ProductsPage() {
 
       <Card>
         <CardHeader>
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="admin-section-heading">
             <CardTitle>Liste des produits</CardTitle>
-            <div className="flex flex-col gap-4 md:flex-row md:items-center">
+            <div className="admin-filters">
               <div className="relative">
                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-500" />
                 <Input
-                  placeholder="Rechercher un produit..."
+                  aria-label="Rechercher un produit" placeholder="Rechercher un soin…"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-8 w-full md:w-[300px]"

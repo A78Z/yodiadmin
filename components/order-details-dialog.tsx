@@ -34,7 +34,6 @@ export function OrderDetailsDialog({
 }: OrderDetailsDialogProps) {
   if (!order) return null;
 
-  console.log(order);
 
   // Timeline/étapes de la commande
   function StepperOrder({ status }: { status: string }) {
@@ -43,20 +42,20 @@ export function OrderDetailsDialog({
         key: "created",
         label: "Commande passée",
         icon: ShoppingCart,
-        color: "#FFCD00",
+        color: "#b18759",
       },
       {
         key: "processing",
         label: "Traitement",
         icon: LoaderCircle,
-        color: "#3B82F6",
+        color: "#80513f",
       },
-      { key: "pending", label: "En attente", icon: Clock3, color: "#F59E42" },
+      { key: "pending", label: "En attente", icon: Clock3, color: "#b18759" },
       {
         key: "delivered",
         label: "Livrée",
         icon: PackageCheck,
-        color: "#22C55E",
+        color: "#718263",
       },
       { key: "cancelled", label: "Annulée", icon: PackageX, color: "#EF4444" },
     ];
@@ -97,7 +96,7 @@ export function OrderDetailsDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl p-0 overflow-hidden rounded-2xl shadow-2xl border-0 max-h-[90vh] overflow-y-auto scrollbar-hide">
+      <DialogContent className="admin-order-dialog p-0 overflow-hidden rounded-2xl shadow-2xl border-0 max-h-[90vh] overflow-y-auto scrollbar-hide">
         {order &&
           (() => {
             const status =
@@ -107,6 +106,7 @@ export function OrderDetailsDialog({
               <div className="bg-white/90 backdrop-blur-xl p-6 md:p-10 flex flex-col gap-6 relative">
                 <DialogHeader className="flex flex-row items-center justify-between mb-2">
                   <DialogTitle className="flex items-center gap-3 text-xl font-bold">
+                    <span className="w-full">Commande #{order._id.slice(-6).toUpperCase()}</span>
                     <span
                       className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold border ${status.color} shadow-sm`}
                     >
@@ -131,7 +131,7 @@ export function OrderDetailsDialog({
                     {(order.products as CART[]).map((prod, idx) => (
                       <div
                         key={idx}
-                        className="flex items-center gap-3 bg-gray-50 rounded-lg px-3 py-2 shadow-sm"
+                        className="admin-order-item flex items-center gap-3 bg-gray-50 rounded-lg px-3 py-2 shadow-sm"
                       >
                         {prod.imageUrl && (
                           <Image
@@ -143,7 +143,7 @@ export function OrderDetailsDialog({
                           />
                         )}
                         <div className="flex-1">
-                          <div className="font-medium text-black/90 text-sm line-clamp-1">
+                          <div className="font-medium text-black/90 text-sm">
                             {prod.title}
                           </div>
                           <div className="text-xs text-gray-500">
@@ -236,7 +236,7 @@ export function OrderDetailsDialog({
                   </div>
                   <div className="flex flex-wrap gap-4 items-center mt-2">
                     <span className="flex items-center gap-2 text-xs text-gray-500">
-                      <CreditCard size={14} className="text-[#FFCD00]" />{" "}
+                      <CreditCard size={14} className="text-[#98715b]" />{" "}
                       <span className="font-medium">Paiement :</span>{" "}
                       <span className="font-semibold text-black/70">
                         {order.paymentMethod === "on-delivery"
@@ -260,7 +260,7 @@ export function OrderDetailsDialog({
                 {order.shippingInfo && (
                   <div className="flex flex-col gap-1 bg-white/80 rounded-xl p-4 mt-3 border border-gray-100">
                     <div className="font-semibold text-black/80 mb-1 flex items-center gap-2">
-                      <MapPin size={16} className="text-[#FFCD00]" /> Adresse de
+                      <MapPin size={16} className="text-[#98715b]" /> Adresse de
                       livraison
                     </div>
                     <div className="flex flex-col gap-1 text-xs text-gray-700">
