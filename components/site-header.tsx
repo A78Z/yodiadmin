@@ -30,7 +30,7 @@ export function SiteHeader() {
         <SidebarTrigger className="md:hidden" aria-label="Ouvrir la navigation" />
         <div className="admin-header-title">Espace de gestion <span aria-hidden="true"> / </span> <strong>{section}</strong></div>
         <div className="admin-header-right">
-          {process.env.NEXT_PUBLIC_ADMIN_REFONTE === "1" && <Link className="admin-store-link" href="https://yodi-storecom-git-refonte-a78zs-projects.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Voir la boutique Preview (nouvel onglet)">Voir la boutique <ArrowUpRight size={15}/></Link>}
+          {process.env.NEXT_PUBLIC_ADMIN_REFONTE === "1" && <Link className="admin-store-link" href={process.env.NEXT_PUBLIC_STOREFRONT_URL || "https://yodi-k.com"} target="_blank" rel="noopener noreferrer" aria-label="Voir la boutique (nouvel onglet)">Voir la boutique <ArrowUpRight size={15}/></Link>}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
