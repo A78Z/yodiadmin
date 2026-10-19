@@ -77,3 +77,13 @@ body[data-admin-refonte] .admin-order-item > .flex-1 { min-width:120px; }
 body[data-admin-refonte] .admin-page [data-slot=table-container] + div { flex-wrap:wrap; gap:12px; }
 body[data-admin-refonte] .admin-page [data-slot=table-container] ~ div { flex-wrap:wrap; gap:12px; }
 @media(max-width:600px) { body[data-admin-refonte] .admin-order-item img { width:48px; height:60px; } }
+
+body[data-admin-refonte] .admin-pagination { flex-wrap:wrap; gap:12px; }
+body[data-admin-refonte] .admin-order-dialog span { overflow-wrap:anywhere; }
+@media(max-width:600px) {
+  .admin-filters { flex-direction:column; align-items:stretch; }
+  .admin-filters > * { width:100%; flex:none; }
+  body[data-admin-refonte] .admin-currency { width:100%; flex-wrap:wrap; height:auto; white-space:normal; gap:6px; }
+  body[data-admin-refonte] .admin-pagination { padding-inline:0; }
+  body[data-admin-refonte] .admin-pagination > div:last-child { flex-wrap:wrap; gap:8px; }
+}
