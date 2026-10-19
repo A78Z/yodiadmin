@@ -110,7 +110,7 @@ export function ProductsTable<TData>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-between px-4 py-4">
+      <div className="admin-pagination flex items-center justify-between px-4 py-4">
         <div className="text-sm text-gray-500">
           {pagination.total} produits au total
         </div>

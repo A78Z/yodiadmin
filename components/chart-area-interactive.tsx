@@ -166,7 +166,7 @@ export function ChartAreaInteractive() {
             <SelectTrigger
               className="flex w-40 **:data-[slot=select-value]:block **:data-[slot=select-value]:truncate @[767px]/card:hidden"
               size="sm"
-              aria-label="Select a value"
+              aria-label="Période des statistiques"
             >
               <SelectValue placeholder="3 derniers mois" />
             </SelectTrigger>
@@ -185,7 +185,7 @@ export function ChartAreaInteractive() {
         </CardAction>
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
-        <ChartContainer
+        {filteredData.length === 0 ? <div className="admin-chart-empty" role="status"><span>Votre activité prend place ici.</span><p>Aucune commande sur cette période. Les prochaines apparaîtront dans ce graphique.</p></div> : <ChartContainer
           config={chartConfig}
           className="aspect-auto h-[250px] w-full"
         >
@@ -251,7 +251,7 @@ export function ChartAreaInteractive() {
               name="Montant total"
             />
           </AreaChart>
-        </ChartContainer>
+        </ChartContainer>}
       </CardContent>
     </Card>
   )

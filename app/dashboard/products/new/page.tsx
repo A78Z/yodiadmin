@@ -146,7 +146,7 @@ export default function NewProductPage() {
   };
 
   return (
-    <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+    <div className="admin-page">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Link href="/dashboard/products">
@@ -154,7 +154,7 @@ export default function NewProductPage() {
               <ArrowLeft className="h-4 w-4" />
             </Button>
           </Link>
-          <h1 className="text-2xl font-bold">Nouveau Produit</h1>
+          <div><p className="admin-eyebrow">Maison Yodi-K · Catalogue</p><h1 className="font-serif text-3xl">Un nouveau soin.</h1></div>
         </div>
       </div>
 
@@ -181,7 +181,7 @@ export default function NewProductPage() {
                             src={imagePreview}
                             alt="Aperçu"
                             fill
-                            className="object-cover rounded-lg"
+                            className="object-contain rounded-lg"
                           />
                           <button
                             type="button"

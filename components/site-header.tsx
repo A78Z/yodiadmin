@@ -1,8 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,9 +14,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogOut } from "lucide-react";
+import { LogOut, ArrowUpRight } from "lucide-react";
 
 export function SiteHeader() {
+  const pathname = usePathname();
+  const section = pathname.includes("/products") ? "Catalogue" : pathname.includes("/clients") ? "Clients" : pathname.includes("/gallery") ? "Galerie" : "Vue d’ensemble";
   const { data: session } = useSession();
 
   const handleLogout = async () => {
@@ -22,19 +26,16 @@ export function SiteHeader() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link className="mr-6 flex items-center space-x-2" href="/">
-            <span className="hidden font-bold sm:inline-block">yodi Admin</span>
-          </Link>
-        </div>
-        <div className="ml-auto flex items-center gap-2">
+    <header className="admin-header">
+        <SidebarTrigger className="md:hidden" aria-label="Ouvrir la navigation" />
+        <div className="admin-header-title">Espace de gestion <span aria-hidden="true"> / </span> <strong>{section}</strong></div>
+        <div className="admin-header-right">
+          {process.env.NEXT_PUBLIC_ADMIN_REFONTE === "1" && <Link className="admin-store-link" href="https://yodi-storecom-git-refonte-a78zs-projects.vercel.app" target="_blank" rel="noopener noreferrer" aria-label="Voir la boutique Preview (nouvel onglet)">Voir la boutique <ArrowUpRight size={15}/></Link>}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
-                className="relative h-8 w-8 rounded-full cursor-pointer"
+                aria-label="Menu du compte administrateur" className="admin-avatar relative h-9 w-9 rounded-full cursor-pointer"
               >
                 <Avatar className="h-8 w-8">
                   <AvatarImage
@@ -79,7 +80,6 @@ export function SiteHeader() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      </div>
     </header>
   );
 }

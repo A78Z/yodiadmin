@@ -119,7 +119,7 @@ export function OrdersTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-between py-4">
+      <div className="admin-pagination flex items-center justify-between py-4">
         <div className="text-sm text-gray-500">
           {pagination.total} commandes au total
         </div>
